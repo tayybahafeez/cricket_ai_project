@@ -1,0 +1,7 @@
+# Handle line endings consistently
+* text=auto
+
+# Force LF for code and data files
+*.py  text eol=lf
+*.csv text eol=lf
+*.md  text eol=lf
