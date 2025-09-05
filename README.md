@@ -21,13 +21,21 @@ The dataset contains T20 cricket match data with the following columns:
 - `won`: 1 if chasing team won, 0 if lost (target variable)
 
 ## 🚀 Quick Start
+## 🚀 Run the Project
+
+Make sure you have **Python 3.11.1** installed.  
+
 
 ### 1. Installation
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/tayybahafeez/cricket_ai_project
 cd cricket_ai_project
+
+## Prerequisites
+
+- Install Python 3.11.1
 
 # Create virtual environment
 python -m venv venv
@@ -50,13 +58,19 @@ echo "GOOGLE_API_KEY=your_gemini_api_key_here" > .env
 
 ```bash
 # 1. Run EDA and generate insights
-python -m cricket_ai.pipelines.eda
+python -m cricket_ml.pipelines.eda
+
+# 1. Run EDA and generate insights
+python -m cricket_ml.pipelines.preprocess
 
 # 2. Train the model
-python -m cricket_ai.pipelines.train
+python -m cricket_ml.pipelines.train
+
+# 2. Train the model
+python -m cricket_ml.pipelines.inference
 
 # 3. Start the API server
-uvicorn cricket_ai.api.main:app --reload --host 127.0.0.1 --port 8000
+uvicorn cricket_ml.api.app:app --reload --host 127.0.0.1 --port 8000
 ```
 
 ### 4. Access the API
@@ -118,12 +132,10 @@ curl "http://127.0.0.1:8000/explain/6af4521f"
 
 ## 📈 Model Performance
 
-### Algorithm Comparison
-
-| Model | Accuracy | Precision | Recall | F1-Score |
-|-------|----------|-----------|--------|----------|
-| Logistic Regression | 0.78 | 0.76 | 0.82 | 0.79 |
-| Random Forest | 0.82 | 0.80 | 0.85 | 0.82 |
+| Model               | Accuracy | Precision | Recall | F1-Score | Best Parameters                                                    |
+| ------------------- | -------- | --------- | ------ | -------- | ------------------------------------------------------------------ |
+| Logistic Regression | 0.781    | 0.807     | 0.852  | 0.829    | `{'C': 10, 'solver': 'liblinear'}`                                 |
+| Random Forest       | 0.966    | 0.967     | 0.979  | 0.973    | `{'max_depth': None, 'min_samples_split': 2, 'n_estimators': 200}` |
 
 ### Feature Engineering
 
@@ -173,12 +185,14 @@ The system provides different explanation styles based on prediction confidence:
 If Gemini API is unavailable, the system falls back to rule-based explanations.
 
 ## 🧪 Testing
+All API and utility tests for the Cricket Match Prediction project passed successfully.
+### Screenshot of Test Output
+![Test Cases Passed](path/to/your/screenshot.png)
 
-Run the test suite:
 
 ```bash
 # Run all tests
-pytest
+pytest -v
 
 # Run specific test file
 pytest testcases/test.py
@@ -192,25 +206,28 @@ pytest --cov=cricket_ai
 ```
 cricket_ai_project/
 ├── cricket_ai/
+│   ├── __init__.py 
 │   ├── api/
-│   │   └── main.py              # FastAPI application
-│   ├── datasets/
-│   │   ├── cricket_dataset.csv  # Training data
-│   │   └── cricket_dataset_test.csv  # Test data
+│   │   └── app.py              # FastAPI application
 │   ├── llm/
 │   │   ├── __init__.py
-│   │   └── explain.py           # LLM integration
+│   │   └── llm_model.py           # LLM integration
 │   ├── pipelines/
 │   │   ├── __init__.py
 │   │   ├── eda.py              # Exploratory Data Analysis
 │   │   ├── preprocess.py       # Data preprocessing
 │   │   ├── train.py            # Model training
-│   │   └── predict.py          # Prediction pipeline
+│   │   └── inference.py          # Prediction pipeline
 │   └── utils/
 │       ├── __init__.py
 │       ├── config.py           # Configuration
 │       └── logger.py           # Logging setup
-├── models/                     # Trained models
+├── models/
+├── datasets/
+│   │   ├── cricket_dataset.csv  # Training data
+│   │   └── cricket_dataset_test.csv  # Test data
+│   └──Visuals
+│        └── heatmap.png    
 ├── testcases/
 │   └── test.py                # Test suite
 ├── requirements.txt           # Dependencies
