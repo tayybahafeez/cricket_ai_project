@@ -96,11 +96,13 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 **Response**:
 ```json
 {
-  "rows_received": 627,
-  "rows_predicted": 185,
-  "dropped_by_filter": 442,
-  "prediction_id": "6af4521f",
+  "status": "success",
   "predictions_file": "/predictions_6af4521f.csv"
+  "details": {
+    "total rows": 627,
+    "filtered_row": 185,
+    "prediction made": 132,
+    "model used": "random_forest"
 }
 ```
 
@@ -115,16 +117,7 @@ curl "http://127.0.0.1:8000/explain/6af4521f"
 **Response**:
 ```json
 {
-  "prediction_id": "6af4521f",
-  "context": {
-    "total_runs": 45,
-    "wickets": 2,
-    "target": 150,
-    "balls_left": 45,
-    "current_run_rate": 6.0,
-    "required_run_rate": 20.0,
-    "prediction": 0
-  },
+  "prediction": "1",
   "confidence": 0.85,
   "explanation": "Based on the current match situation, the chasing team has a very high chance of winning because they are performing exceptionally well with a strong run rate and favorable conditions."
 }
@@ -208,6 +201,7 @@ cricket_ai_project/
 ├── cricket_ai/
 │   ├── __init__.py 
 │   ├── api/
+│   │  ├── __init__.py
 │   │   └── app.py              # FastAPI application
 │   ├── llm/
 │   │   ├── __init__.py
@@ -226,12 +220,13 @@ cricket_ai_project/
 ├── datasets/
 │   │   ├── cricket_dataset.csv  # Training data
 │   │   └── cricket_dataset_test.csv  # Test data
-│   └──Visuals
-│        └── heatmap.png    
+│   │   └──Visuals
+│   │      └── heatmap.png    
 ├── testcases/
 │   └── test.py                # Test suite
 ├── requirements.txt           # Dependencies
-└── README.md                 # This file
+└── README.md
+└── Report                 # This file
 ```
 
 ## 🔍 Key Insights from EDA
