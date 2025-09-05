@@ -1,0 +1,17 @@
+{
+  "model_name": "random_forest",
+  "feature_columns": [
+    "total_runs",
+    "wickets",
+    "target",
+    "balls_left",
+    "current_run_rate",
+    "required_run_rate"
+  ],
+  "best_params": {
+    "max_depth": null,
+    "min_samples_split": 2,
+    "n_estimators": 200
+  },
+  "data_path": "C:\\Users\\Tayyba\\Desktop\\cricket_ai_project\\datasets\\cricket_dataset_cleaned.csv"
+}
