@@ -198,7 +198,7 @@ pytest --cov=cricket_ai
 
 ```
 cricket_ai_project/
-├── cricket_ai/
+├── cricket_ml/
 │   ├── __init__.py 
 │   ├── api/
 │   │  ├── __init__.py
