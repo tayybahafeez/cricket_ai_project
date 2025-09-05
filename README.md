@@ -180,7 +180,7 @@ If Gemini API is unavailable, the system falls back to rule-based explanations.
 ## 🧪 Testing
 All API and utility tests for the Cricket Match Prediction project passed successfully.
 ### Screenshot of Test Output
-[Testcases Screenshot](testcases/results/testcases.png)
+![Testcases Screenshot](testcases/results/testcases.png)
 
 
 ```bash
