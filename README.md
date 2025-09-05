@@ -180,7 +180,7 @@ If Gemini API is unavailable, the system falls back to rule-based explanations.
 ## 🧪 Testing
 All API and utility tests for the Cricket Match Prediction project passed successfully.
 ### Screenshot of Test Output
-![Test Cases Passed](path/to/your/screenshot.png)
+[Testcases Screenshot](testcases/results/testcases.png)
 
 
 ```bash
@@ -221,7 +221,9 @@ cricket_ai_project/
 │   │   ├── cricket_dataset.csv  # Training data
 │   │   └── cricket_dataset_test.csv  # Test data
 │   │   └──Visuals
-│   │      └── heatmap.png    
+│   │      └── heatmap.png
+│   │   └──Predictions
+│   │      └── data_123dr3.csv
 ├── testcases/
 │   └── test.py                # Test suite
 ├── requirements.txt           # Dependencies
@@ -247,7 +249,7 @@ cricket_ai_project/
 
 ### Extending LLM Integration
 
-1. Add new provider in `cricket_ai/llm/explain.py`
+1. Add new provider in `cricket_ai/llm/llm_model.py`
 2. Update configuration in `cricket_ai/utils/config.py`
 3. Test with different prompt templates
 
@@ -259,7 +261,7 @@ cricket_ai_project/
 
 ## 📝 Model Report
 
-See `model_report.md` for detailed analysis of:
+See `Cricket_AI_Project_Report.pdf` for detailed analysis of:
 - Data preprocessing decisions
 - Model selection rationale
 - Performance evaluation
