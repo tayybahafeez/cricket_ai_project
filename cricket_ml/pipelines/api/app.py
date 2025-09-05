@@ -12,7 +12,6 @@ from pathlib import Path
 log = get_logger()
 app = FastAPI(title="Cricket Match Prediction API")
 
-# Load model metadata once
 try:
     with open(META_PATH, "r") as f:
         MODEL_META = json.load(f)
@@ -70,10 +69,10 @@ async def predict(file: UploadFile = File(..., description="📂 Upload your CSV
             "status": "success",
             "predictions_file": meta.get("predictions_file"),
             "details": {
-                "total rows": len(df),
+                "total_rows": len(df),
                 "filtered_row": len(df_proc),
-                "prediction made": int(preds["prediction"].sum()),
-                "model used": meta.get("model_name", MODEL_META.get("model_name", "unknown"))
+                "prediction_made": int(preds["prediction"].sum()),
+                "model_used": MODEL_META.get("model_name", "unknown"),
             }
         })
     except Exception as e:
@@ -91,14 +90,17 @@ def explain_prediction(prediction_id: str):
     if df.empty:
         raise HTTPException(status_code=400, detail="No rows to explain.")
 
+    # Take the first row (or you can modify to take multiple rows)
     row = df.iloc[0].to_dict()
     confidence = float(row.get("confidence", 0.5))
+    prediction_value = int(row.get("prediction", 0))  # <-- actual 0/1 prediction
+
     ctx = {k: row[k] for k in ["total_runs", "wickets", "target", "balls_left",
-                                "current_run_rate", "required_run_rate", "prediction"]}
+                                "current_run_rate", "required_run_rate"]}
     text = explain(ctx, confidence)
     
-    # Add status key
     return {
-            "prediction_id": prediction_id,
-            "confidence": confidence,
-            "explanation": text}
+        "prediction": prediction_value,        # 0 or 1
+        "confidence": confidence,              # probability/confidence
+        "explanation": text                     # LLM explanation
+    }
