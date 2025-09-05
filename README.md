@@ -193,6 +193,12 @@ pytest testcases/test.py
 # Run with coverage
 pytest --cov=cricket_ai
 ```
+### Screenshot of Test Output
+1. **Testcases Output**
+![Testcases Screenshot](testcases/results/input.png)
+
+2. **Predictions Output**
+![Predictions Screenshot](testcases/results/output.png)
 
 ## 📁 Project Structure
 
@@ -228,7 +234,8 @@ cricket_ai_project/
 │   └── test.py                # Test suite
 ├── requirements.txt           # Dependencies
 └── README.md
-└── Report                 # This file
+└── Report
+└── run_test_predictions.py                 # Testing file
 ```
 
 ## 🔍 Key Insights from EDA
